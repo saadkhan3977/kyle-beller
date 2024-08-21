@@ -159,6 +159,70 @@ $(document).ready(function() {
             }
         });
     });
+    
+    $('#wed-form').on('submit', function(e) {
+        e.preventDefault(); // Form ke default submit ko rokta hai
+        
+        $.ajax({
+            url: "{{ route('submit.wed.form') }}",
+            method: 'POST',
+            // headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
+
+            data: $(this).serialize(), // Form ke data ko serialize karta hai
+            success: function(response) {
+                toastr.success('Form submitted successfully!'); // Success message show karta hai
+                $('#event-form')[0].reset(); // Form ko reset karta hai
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) { // Validation errors ke liye
+                    var errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        $('#'+key+'-error').text(value[0]);
+                        // toastr.error(key); // Har error ko show karta hai
+                        toastr.error(value[0]); // Har error ko show karta hai
+                    });
+                } else {
+                    toastr.error('Something went wrong. Please try again.');
+                }
+                // Clear any previous errors
+                // $('input').removeClass('error');
+                //         $('.error-message').text('');
+
+                //         // Handle validation errors
+                //         let errors = response.responseJSON.errors;
+                //         let firstErrorElement = null;
+
+                //         console.log(errors);
+                //         $.each(errors, function (key, value) {
+                //             // Highlight the input field with an error
+                //             let inputElement = $('[name="' + key + '"]');
+                //             inputElement.addClass('error');
+
+                //             // Display the error message
+                //             $('#'+key+'-error').text(value[0]);
+
+                //             // Focus on the first input field with an error
+                //             if (firstErrorElement === null) {
+                //                 firstErrorElement = inputElement;
+                //             }
+                //         });
+
+                //         // Scroll to the first error element and set focus
+                //         if (firstErrorElement) {
+                //             $('html, body').animate({
+                //                 scrollTop: firstErrorElement.offset().top - 10
+                //             }, 500, function () {
+                //                 firstErrorElement.focus();
+
+                //                 // Optionally, remove the error class after a delay (e.g., 3 seconds)
+                //                 setTimeout(function() {
+                //                     firstErrorElement.removeClass('error');
+                //                 }, 3000);
+                //             });
+                //         }
+            }
+        });
+    });
 });
 </script>
 </html>

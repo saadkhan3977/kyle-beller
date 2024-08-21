@@ -131,8 +131,9 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 Route::get('/', [FrontendController::class,'index']);
 Route::get('/home', [FrontendController::class,'index'])->name('home');
 Route::get('/non-wedding-planning-questionnaire', [FrontendController::class,'nonwedding_planning'])->name('non-wedding-planning-questionnaire');
-Route::get('/wedding-planning-questionnaire', [FrontendController::class,'wedding_planning'])->name('wedding-planning-questionnaire');
 Route::post('/submit-event-form', [FrontendController::class,'submitEventForm'])->name('submit.event.form');
+Route::get('/wedding-planning-questionnaire', [FrontendController::class,'wedding_planning'])->name('wedding-planning-questionnaire');
+Route::post('/submit-wed-form', [FrontendController::class,'submitWedForm'])->name('submit.wed.form');
 
 Route::get('/services',[FrontendController::class,'services'])->name('services');
 Route::get('/about-us',[FrontendController::class,'aboutUs'])->name('about-us');
@@ -207,6 +208,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     })->name('file-manager');
     
     Route::resource('event',\App\Http\Controllers\Admin\EventController::class);
+    Route::get('/wedding/index',[\App\Http\Controllers\Admin\WeddingController::class,'wedding_event'])->name('wedding.index');
+    Route::get('/wedding-detail/{id}',[\App\Http\Controllers\Admin\WeddingController::class,'wedding_event_detail'])->name('wedding.detail');
+    Route::get('/non-wedding/index',[\App\Http\Controllers\Admin\WeddingController::class,'non_wedding_event'])->name('nonwedding.index');
     
     Route::resource('property',\App\Http\Controllers\Admin\PropertyController::class);
     Route::resource('features',\App\Http\Controllers\Admin\FeatureController::class);

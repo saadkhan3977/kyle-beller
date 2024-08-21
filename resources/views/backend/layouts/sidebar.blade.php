@@ -26,7 +26,7 @@
         <!-- Heading -->
         
 
-
+<!-- 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#propertyCollapse" aria-expanded="true" aria-controls="propertyCollapse">
           <i class="fas fa-cubes"></i>
@@ -37,6 +37,20 @@
             <h6 class="collapse-header">Events Options:</h6>
             <a class="collapse-item" href="{{route('event.index')}}">View</a>
             <a class="collapse-item" href="{{route('event.create')}}">Add</a>
+          </div>
+        </div>
+    </li> -->
+    
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#wpropertyCollapse" aria-expanded="true" aria-controls="propertyCollapse">
+          <i class="fas fa-cubes"></i>
+          <span>Wedding Event</span>
+        </a>
+        <div id="wpropertyCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Events Options:</h6>
+            <a class="collapse-item" href="{{route('wedding.index')}}">Wedding</a>
+            <a class="collapse-item" href="{{route('nonwedding.index')}}">Non Wedding</a>
           </div>
         </div>
     </li>
